@@ -3,8 +3,8 @@ import { Aperture, Zap, Cpu, Palette, Gpu, Sun, Moon, Star } from 'lucide-react'
 import { AppSettings } from '../types';
 
 interface HeaderProps {
-  settings?: Appsettings;
-  onToggleSetting?: (key: keyof Appsettings) => void;
+  settings: AppSettings;
+  onToggleSetting: (key: keyof AppSettings) => void;
   theme: 'light' | 'dark' | 'system';
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
   isWebGLSupported?: boolean;
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ settings, onToggleSetting, theme, setTh
   
   const isCrostiniActive = settings.crostiniSafe;
   const isHdrActive = settings.hdr;
-  const isWebGpuActive = settings?.webGpuEnabled || false; // Placeholder
+  const isWebGpuActive = settings?.webGpuEnabled || false;
   const isBoostActive = settings?.boost || false;
   
   // FIXED: Use Container tokens to support CSS Variables (Hex Codes)
@@ -43,13 +43,15 @@ const Header: React.FC<HeaderProps> = ({ settings, onToggleSetting, theme, setTh
             onClick={() => setTheme('light')}
             data-testid="theme-btn-light"
             className={`p-2 rounded-[8px] ${theme === 'light' ? 'bg-primary/20 text-primary' : 'text-onSurfaceVariant'}`}
+            title="Light Theme"
           >
             <Sun size={16} />
           </button>
-          <button 
+          <button
             onClick={() => setTheme('dark')}
             data-testid="theme-btn-dark"
             className={`p-2 rounded-[8px] ${theme === 'dark' ? 'bg-primary/20 text-primary' : 'text-onSurfaceVariant'}`}
+            title="Dark Theme"
           >
             <Moon size={16} />
           </button>
@@ -57,6 +59,7 @@ const Header: React.FC<HeaderProps> = ({ settings, onToggleSetting, theme, setTh
             onClick={() => setTheme('system')}
             data-testid="theme-btn-system"
             className={`p-2 rounded-[8px] ${theme === 'system' ? 'bg-primary/20 text-primary' : 'text-onSurfaceVariant'}`}
+            title="System Theme"
           >
             <Star size={16} />
           </button>
@@ -64,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ settings, onToggleSetting, theme, setTh
 
         {/* Setting Toggles */}
         <div className="flex flex-wrap gap-3">
-          <button
+          <button 
             onClick={() => onToggleSetting('webGpuEnabled')}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-[12px] transition-colors text-xs font-medium border select-none ${toggleButtonClass(isWebGpuActive)}`}
             title="Enable WebGPU Backend (Experimental)"
@@ -85,9 +88,11 @@ const Header: React.FC<HeaderProps> = ({ settings, onToggleSetting, theme, setTh
           >
             <Palette className="w-3.5 h-3.5 text-primary" />10-Bit Color
           </button>
+          
+          {/* Conditional Boost Button */}
           {isWebGLSupported ? (
             <button
-              onClick={() => onToggleSetting?.('boost')}
+              onClick={() => onToggleSetting('boost')}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-[12px] transition-colors text-xs font-medium border select-none ${toggleButtonClass(isBoostActive)}`}
               title="Enable High Performance Mode (60 FPS Target)"
             >
