@@ -1,0 +1,8 @@
+{
+  "name": "Prism Pro",
+  "description": "A professional-grade camera suite web application featuring real-time filters, histograms, and AI simulation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
