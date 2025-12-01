@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -43,8 +44,13 @@ export default {
         
         // Aliases for backward compatibility
         'surface-primary': 'var(--md-sys-color-surface)',
-        'surfaceContainer': 'var(--md-sys-color-surface-container)',
-        'surfaceVariant': 'var(--md-sys-color-surface-variant)',
+        surfaceDim: 'var(--md-sys-color-surface-dim)',
+        surfaceBright: 'var(--md-sys-color-surface-bright)',
+        surfaceContainerLowest: 'var(--md-sys-color-surface-container-lowest)',
+        surfaceContainerLow: 'var(--md-sys-color-surface-container-low)',
+        surfaceContainer: 'var(--md-sys-color-surface-container)',
+        surfaceContainerHigh: 'var(--md-sys-color-surface-container-high)',
+        surfaceContainerHighest: 'var(--md-sys-color-surface-container-highest)',
         
         'accent': 'var(--md-sys-color-tertiary)',
         'accent-ring': 'var(--md-sys-color-tertiary-container)',
