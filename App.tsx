@@ -1,6 +1,7 @@
 
 import React, { useState, useCallback } from 'react';
 import Header from './components/Header';
+import { useTheme } from './hooks/useTheme';
 import Viewfinder from './components/Viewfinder';
 import SettingsFlyout from './components/SettingsFlyout';
 import { useCamera } from './hooks/useCamera';
@@ -11,6 +12,7 @@ import { INITIAL_FILTERS, INITIAL_SETTINGS, INITIAL_AUDIO_CONFIG } from './const
 import { Toast } from './components/Toast';
 
 export default function App() {
+  const { theme, setTheme } = useTheme();
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
   const [settings, setSettings] = useState<AppSettings>(INITIAL_SETTINGS);
   const [audioConfig, setAudioConfig] = useState<AudioConfig>(INITIAL_AUDIO_CONFIG);
@@ -152,6 +154,8 @@ export default function App() {
         <Header 
           settings={settings}
           onToggleSetting={handleToggleSetting}
+          theme={theme}
+          setTheme={setTheme}
         />
       </div>
 

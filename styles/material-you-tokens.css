@@ -1,29 +1,7 @@
-/* Material You Color Tokens - Dark Theme with Enhanced Accents */
+/* styles/material-you-tokens.css */
+@import './theme.css';
+
 :root {
-  /* Primary - Purple/Lavender */
-  --md-sys-color-primary: #D0BCFF;
-  --md-sys-color-on-primary: #381E72;
-  --md-sys-color-primary-container: #4F378B;
-  --md-sys-color-on-primary-container: #EADDFF;
-
-  /* Secondary - Soft Purple */
-  --md-sys-color-secondary: #CCC2DC;
-  --md-sys-color-on-secondary: #332D41;
-  --md-sys-color-secondary-container: #4A4458;
-  --md-sys-color-on-secondary-container: #E8DEF8;
-
-  /* Tertiary - Pink */
-  --md-sys-color-tertiary: #EFB8C8;
-  --md-sys-color-on-tertiary: #492532;
-  --md-sys-color-tertiary-container: #633B48;
-  --md-sys-color-on-tertiary-container: #FFD8E4;
-
-  /* Error - Red */
-  --md-sys-color-error: #F2B8B5;
-  --md-sys-color-on-error: #601410;
-  --md-sys-color-error-container: #8C1D18;
-  --md-sys-color-on-error-container: #F9DEDC;
-
   /* Accent Colors - Vibrant Highlights */
   --accent-cyan: #00E5FF;
   --accent-cyan-glow: rgba(0, 229, 255, 0.4);
@@ -41,38 +19,6 @@
   --accent-purple-glow: rgba(156, 39, 176, 0.4);
   --accent-lime: #C0FF60;
   --accent-lime-glow: rgba(192, 255, 96, 0.4);
-
-  /* Background */
-  --md-sys-color-background: #1C1B1F;
-  --md-sys-color-on-background: #E6E1E5;
-
-  /* Surface */
-  --md-sys-color-surface: #1C1B1F;
-  --md-sys-color-on-surface: #E6E1E5;
-  --md-sys-color-surface-variant: #49454F;
-  --md-sys-color-on-surface-variant: #CAC4D0;
-
-  /* Surface Containers */
-  --md-sys-color-surface-dim: #141218;
-  --md-sys-color-surface-bright: #3B383E;
-  --md-sys-color-surface-container-lowest: #0F0D13;
-  --md-sys-color-surface-container-low: #1D1B20;
-  --md-sys-color-surface-container: #211F26;
-  --md-sys-color-surface-container-high: #2B2930;
-  --md-sys-color-surface-container-highest: #36343B;
-
-  /* Outline */
-  --md-sys-color-outline: #938F99;
-  --md-sys-color-outline-variant: #49454F;
-
-  /* Other */
-  --md-sys-color-shadow: #000000;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-inverse-surface: #E6E1E5;
-  --md-sys-color-inverse-on-surface: #313033;
-  --md-sys-color-inverse-primary: #6750A4;
-
-  color-scheme: dark;
 }
 
 body {

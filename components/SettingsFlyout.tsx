@@ -173,10 +173,10 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
   };
 
   const Switch = ({ checked, onChange, label, subLabel }: { checked: boolean, onChange: (e: any) => void, label: string, subLabel?: string }) => (
-    <label className="flex items-center justify-between p-4 rounded-[24px] bg-surfaceContainer hover:bg-white/10 cursor-pointer transition-all duration-200 group border border-transparent hover:border-white/5">
+    <label className="flex items-center justify-between p-4 rounded-[24px] bg-surfaceContainer hover:bg-surfaceContainerHigh cursor-pointer transition-all duration-200 group border border-transparent hover:border-outlineVariant">
       <div className="flex flex-col gap-0.5">
-        <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">{label}</span>
-        {subLabel && <span className="text-[11px] text-slate-500 font-medium">{subLabel}</span>}
+        <span className="text-sm font-medium text-onSurface group-hover:text-onSurface transition-colors">{label}</span>
+        {subLabel && <span className="text-[11px] text-onSurfaceVariant font-medium">{subLabel}</span>}
       </div>
       <div className="relative inline-flex items-center cursor-pointer">
         <input 
@@ -185,7 +185,7 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
           onChange={onChange}
           className="sr-only peer" 
         />
-        <div className="w-[52px] h-[32px] bg-surfaceVariant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-slate-300 after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary peer-checked:after:bg-onPrimary peer-checked:after:border-transparent peer-checked:after:translate-x-[20px] transition-colors duration-200"></div>
+        <div className="w-[52px] h-[32px] bg-surfaceVariant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-outline after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary peer-checked:after:bg-onPrimary peer-checked:after:border-transparent peer-checked:after:translate-x-[20px] transition-colors duration-200"></div>
       </div>
     </label>
   );
@@ -194,19 +194,19 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
     <>
       {/* Backdrop */}
       <div 
-        className={`fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-500 z-[90] ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-scrim/60 backdrop-blur-sm transition-opacity duration-500 z-[90] ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
       />
       {/* Sidebar */}
       <aside 
-        className={`fixed top-0 right-0 h-full w-full max-w-[400px] bg-surface border-l border-white/5 shadow-2xl overflow-y-auto transform transition-transform duration-500 ease-[cubic-bezier(0.2,0.0,0,1.0)] rounded-l-[32px] ${isOpen ? 'translate-x-0' : 'translate-x-full'} ${className || 'z-[110]'}`}
+        className={`fixed top-0 right-0 h-full w-full max-w-[400px] bg-surface border-l border-outlineVariant shadow-2xl overflow-y-auto transform transition-transform duration-500 ease-[cubic-bezier(0.2,0.0,0,1.0)] rounded-l-[32px] ${isOpen ? 'translate-x-0' : 'translate-x-full'} ${className || 'z-[110]'}`}
       >
         <div className="p-8 space-y-8 min-h-full flex flex-col">
           
           {/* Header */}
-          <div className="flex items-center justify-between sticky top-0 bg-surface pt-2 pb-4 z-20 border-b border-white/5 shrink-0">
+          <div className="flex items-center justify-between sticky top-0 bg-surface pt-2 pb-4 z-20 border-b border-outlineVariant shrink-0">
             <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-normal text-slate-100">
+              <h2 className="text-2xl font-normal text-onSurface">
                 {mode === 'basic' ? 'Basic Settings' : 'Pro Controls'}
               </h2>
               {mode === 'pro' && (
@@ -214,15 +214,15 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                   onClick={handleResetAll}
                   className={`text-[10px] font-bold uppercase tracking-wider border px-3 py-1 rounded-full transition-all duration-200 ${
                     confirmReset 
-                      ? 'bg-red-500 text-white border-red-500 animate-pulse' 
-                      : 'text-red-400 border-red-500/30 hover:bg-red-500/10'
+                      ? 'bg-error text-onError border-error animate-pulse'
+                      : 'text-error border-error/30 hover:bg-error/10'
                   }`}
                 >
                   {confirmReset ? 'Confirm?' : 'Reset All'}
                 </button>
               )}
             </div>
-            <button onClick={onClose} className="p-3 rounded-full hover:bg-surfaceContainer hover:text-white text-slate-400 transition-colors">
+            <button onClick={onClose} className="p-3 rounded-full hover:bg-surfaceContainer hover:text-onSurface text-onSurfaceVariant transition-colors">
               <X className="w-6 h-6" />
             </button>
           </div>
@@ -232,14 +232,14 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
             <div className="space-y-6 pb-10 animate-in slide-in-from-right-4 duration-500">
               
               {/* Intelligence */}
-              <div className="bg-surfaceContainer/50 border border-white/5 rounded-[32px] p-6 space-y-4">
+              <div className="bg-surfaceContainerLow border border-outlineVariant rounded-[32px] p-6 space-y-4">
                  <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-slate-200 ml-1">Intelligence Suite</h3>
+                  <h3 className="text-sm font-bold text-onSurface ml-1">Intelligence Suite</h3>
                   <BrainCircuit className="w-4 h-4 text-primary" />
                 </div>
                 
                 <div className="space-y-3 px-1">
-                     <div className="flex justify-between text-xs text-slate-300 font-medium">
+                     <div className="flex justify-between text-xs text-onSurfaceVariant font-medium">
                        <span>AI Background Blur</span> 
                        <span>{(filters.blur * 100).toFixed(0)}%</span>
                      </div>
@@ -251,7 +251,7 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                      />
                 </div>
                 <div className="space-y-3 px-1">
-                     <div className="flex justify-between text-xs text-slate-300 font-medium">
+                     <div className="flex justify-between text-xs text-onSurfaceVariant font-medium">
                        <span>AI Portrait Lighting</span> 
                        <span>{(filters.portraitLighting * 100).toFixed(0)}%</span>
                      </div>
@@ -271,9 +271,9 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
               </div>
 
               {/* Scopes & Tools */}
-              <div className="bg-surfaceContainer/50 border border-white/5 rounded-[32px] p-6 space-y-2">
+              <div className="bg-surfaceContainerLow border border-outlineVariant rounded-[32px] p-6 space-y-2">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-bold text-slate-200 ml-1">Scopes & Tools</h3>
+                  <h3 className="text-sm font-bold text-onSurface ml-1">Scopes & Tools</h3>
                   <Activity className="w-4 h-4 text-primary" />
                 </div>
                  <Switch label="RGB Parade" subLabel="Color Waveform Monitor" checked={settings.scopes} onChange={(e) => setSettings(s => ({ ...s, scopes: e.target.checked }))} />
@@ -284,9 +284,9 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
               </div>
 
               {/* Basic Guides */}
-              <div className="bg-surfaceContainer/50 border border-white/5 rounded-[32px] p-6 space-y-4">
+              <div className="bg-surfaceContainerLow border border-outlineVariant rounded-[32px] p-6 space-y-4">
                  <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-slate-200 ml-1">Composition</h3>
+                  <h3 className="text-sm font-bold text-onSurface ml-1">Composition</h3>
                   <LayoutTemplate className="w-4 h-4 text-primary" />
                 </div>
                 <div className="grid grid-cols-3 gap-2">
@@ -294,7 +294,7 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                       <button
                         key={g}
                         onClick={() => setSettings(s => ({ ...s, guides: g as any }))}
-                        className={`px-3 py-2 rounded-xl text-[10px] font-medium border transition-all ${settings.guides === g ? 'bg-primary text-black border-primary' : 'bg-surfaceContainer text-slate-400 border-white/5 hover:bg-white/5'}`}
+                        className={`px-3 py-2 rounded-xl text-[10px] font-medium border transition-all ${settings.guides === g ? 'bg-primary text-onPrimary border-primary' : 'bg-surfaceContainer text-onSurfaceVariant border-outlineVariant hover:bg-surfaceContainerHigh'}`}
                       >
                         {g.toUpperCase()}
                       </button>
@@ -303,9 +303,9 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
               </div>
 
                {/* LUTs */}
-              <div className="bg-surfaceContainer/50 border border-white/5 rounded-[32px] p-6">
+              <div className="bg-surfaceContainerLow border border-outlineVariant rounded-[32px] p-6">
                 <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-sm font-bold text-slate-200 ml-1">Color Profile</h3>
+                  <h3 className="text-sm font-bold text-onSurface ml-1">Color Profile</h3>
                   <Palette className="w-4 h-4 text-primary" />
                 </div>
                 <div className="flex flex-wrap gap-2.5 max-h-[160px] overflow-y-auto pr-2 custom-scrollbar">
@@ -317,11 +317,11 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                          onClick={() => handleLutChange(preset)}
                          className={`px-4 py-2.5 rounded-[16px] text-xs font-medium border transition-all duration-200 flex items-center gap-2
                            ${isActive 
-                             ? 'border-transparent bg-primary text-black' 
-                             : `border-white/10 bg-surfaceContainer text-slate-300 hover:bg-white/10 hover:text-white ${preset.colorClass ? '' : ''}`
+                             ? 'border-transparent bg-primary text-onPrimary'
+                             : `border-outlineVariant bg-surfaceContainer text-onSurface hover:bg-surfaceContainerHigh hover:text-onSurface ${preset.colorClass ? '' : ''}`
                            }`}
                        >
-                         {isActive && <div className="w-1.5 h-1.5 rounded-full bg-black"></div>}
+                         {isActive && <div className="w-1.5 h-1.5 rounded-full bg-onPrimary"></div>}
                          {!isActive && preset.colorClass && (
                             <div className={`w-2 h-2 rounded-full ${preset.colorClass}`}></div>
                          )}
@@ -333,23 +333,23 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
               </div>
 
               {/* Gallery */}
-              <div className="bg-surfaceContainer/50 border border-white/5 rounded-[32px] p-6">
+              <div className="bg-surfaceContainerLow border border-outlineVariant rounded-[32px] p-6">
                  <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-bold text-slate-200 ml-1">Session Media</h3>
-                    <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full text-slate-400">{gallery.length}</span>
+                    <h3 className="text-sm font-bold text-onSurface ml-1">Session Media</h3>
+                    <span className="text-[10px] bg-surfaceContainer px-2 py-0.5 rounded-full text-onSurfaceVariant">{gallery.length}</span>
                   </div>
                   <Image className="w-4 h-4 text-primary" />
                 </div>
 
                 {gallery.length === 0 ? (
-                  <div className="h-32 flex flex-col items-center justify-center text-slate-500 border border-dashed border-white/10 rounded-[20px] bg-white/5">
+                  <div className="h-32 flex flex-col items-center justify-center text-onSurfaceVariant border border-dashed border-outlineVariant rounded-[20px] bg-surfaceContainer">
                      <span className="text-xs">No captures in session</span>
                   </div>
                 ) : (
                   <div className="grid grid-cols-2 gap-3 max-h-[300px] overflow-y-auto custom-scrollbar pr-1">
                      {gallery.map((item) => (
-                        <div key={item.id} className="relative group aspect-video rounded-xl overflow-hidden bg-black border border-white/10">
+                        <div key={item.id} className="relative group aspect-video rounded-xl overflow-hidden bg-black border border-outlineVariant">
                            {item.type === 'video' ? (
                              <>
                                 <video src={item.url} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -364,9 +364,9 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                              <img src={item.url} alt="Capture" className="w-full h-full object-cover" />
                            )}
                            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-2">
-                              <button onClick={() => onDownload?.(item)} className="p-2 rounded-full bg-white/10 hover:bg-primary hover:text-black text-white transition-colors" title="Download"><Download className="w-4 h-4" /></button>
-                              <button onClick={() => onShare?.(item)} className="p-2 rounded-full bg-white/10 hover:bg-blue-500 hover:text-white text-white transition-colors" title="Share"><Share2 className="w-4 h-4" /></button>
-                              <button onClick={() => onDelete?.(item.id)} className="p-2 rounded-full bg-white/10 hover:bg-red-500 hover:text-white text-white transition-colors" title="Delete"><Trash2 className="w-4 h-4" /></button>
+                              <button onClick={() => onDownload?.(item)} className="p-2 rounded-full bg-surfaceContainer hover:bg-primary hover:text-onPrimary text-onSurface transition-colors" title="Download"><Download className="w-4 h-4" /></button>
+                              <button onClick={() => onShare?.(item)} className="p-2 rounded-full bg-surfaceContainer hover:bg-blue-500 hover:text-white text-onSurface transition-colors" title="Share"><Share2 className="w-4 h-4" /></button>
+                              <button onClick={() => onDelete?.(item.id)} className="p-2 rounded-full bg-surfaceContainer hover:bg-error hover:text-onError text-onSurface transition-colors" title="Delete"><Trash2 className="w-4 h-4" /></button>
                            </div>
                         </div>
                      ))}
@@ -375,13 +375,13 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
               </div>
               
               {/* Status Footer */}
-              <div className="bg-surface border border-white/5 rounded-[24px] p-4 flex flex-wrap gap-4 text-[11px] text-slate-400 font-medium mt-auto">
+              <div className="bg-surface border border-outlineVariant rounded-[24px] p-4 flex flex-wrap gap-4 text-[11px] text-onSurfaceVariant font-medium mt-auto">
                  <span className="flex items-center gap-2 px-3 py-1.5 bg-surfaceContainer rounded-full">
-                    <Sparkles className={`w-3 h-3 ${detectedScene !== 'Standard' ? 'text-primary' : 'text-slate-600'}`} />
+                    <Sparkles className={`w-3 h-3 ${detectedScene !== 'Standard' ? 'text-primary' : 'text-onSurfaceVariant/50'}`} />
                     <span className={detectedScene !== 'Standard' ? 'text-primary' : ''}>Scene: {detectedScene}</span>
                  </span>
                  <span className="flex items-center gap-2 px-3 py-1.5 bg-surfaceContainer rounded-full">
-                    <Cable className={`w-3 h-3 ${midiDevice ? 'text-primary' : 'text-slate-600'}`} />
+                    <Cable className={`w-3 h-3 ${midiDevice ? 'text-primary' : 'text-onSurfaceVariant/50'}`} />
                     <span>MIDI: {midiDevice ? 'ON' : 'OFF'}</span>
                  </span>
               </div>
@@ -393,26 +393,26 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
              <div className="space-y-8 pb-10 animate-in slide-in-from-right-4 duration-500">
                 {/* Post Processing / Grading */}
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center bg-surfaceContainer px-4 py-2 rounded-full">
+                  <div className="flex justify-between items-center bg-surfaceContainerLow px-4 py-2 rounded-full">
                     <div className="flex items-center text-sm font-medium text-primary">
                       <span className="uppercase tracking-widest text-[10px]">Grading FX</span>
                       <Sliders className="w-3.5 h-3.5 ml-2" />
                     </div>
-                    <button onClick={resetGrading} className="text-slate-500 hover:text-white transition-colors p-1" title="Reset Grading">
+                    <button onClick={resetGrading} className="text-onSurfaceVariant hover:text-onSurface transition-colors p-1" title="Reset Grading">
                       <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-700 ease-in-out ${spinning['grading'] ? '-rotate-[360deg]' : ''}`} />
                     </button>
                   </div>
                   
                   <div className="space-y-6 px-2">
                     {/* Import LUT */}
-                    <div className="p-4 bg-surfaceContainer rounded-[20px] border border-white/5 space-y-3">
+                    <div className="p-4 bg-surfaceContainer rounded-[20px] border border-outlineVariant space-y-3">
                        <div className="flex justify-between items-center">
-                         <span className="text-xs font-medium text-slate-300">3D LUT (.png/.cube)</span>
-                         <span className="text-[10px] text-slate-500">512x512 Identity</span>
+                         <span className="text-xs font-medium text-onSurface">3D LUT (.png/.cube)</span>
+                         <span className="text-[10px] text-onSurfaceVariant">512x512 Identity</span>
                        </div>
                        <button 
                          onClick={() => fileInputRef.current?.click()}
-                         className="w-full py-2.5 rounded-[12px] bg-white/5 hover:bg-white/10 text-xs text-slate-200 border border-white/10 flex items-center justify-center gap-2 transition-colors"
+                         className="w-full py-2.5 rounded-[12px] bg-surfaceContainerHigh hover:bg-surfaceBright text-xs text-onSurface border border-outlineVariant flex items-center justify-center gap-2 transition-colors"
                        >
                          <Upload className="w-3.5 h-3.5" />
                          Import LUT Strip
@@ -426,23 +426,23 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                     </div>
 
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Contrast</span><span>{filters.contrast}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Contrast</span><span>{filters.contrast}</span></div>
                        <input type="range" min="0" max="2" step="0.1" value={filters.contrast} onChange={handleRangeChange('contrast')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Brightness</span><span>{filters.brightness}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Brightness</span><span>{filters.brightness}</span></div>
                        <input type="range" min="0" max="2" step="0.1" value={filters.brightness} onChange={handleRangeChange('brightness')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Saturation</span><span>{filters.saturation}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Saturation</span><span>{filters.saturation}</span></div>
                        <input type="range" min="0" max="2" step="0.1" value={filters.saturation} onChange={handleRangeChange('saturation')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Hue Shift</span><span>{filters.hue}°</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Hue Shift</span><span>{filters.hue}°</span></div>
                        <input type="range" min="-180" max="180" step="5" value={filters.hue} onChange={handleRangeChange('hue')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Sepia</span><span>{filters.sepia}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Sepia</span><span>{filters.sepia}</span></div>
                        <input type="range" min="0" max="1" step="0.1" value={filters.sepia} onChange={handleRangeChange('sepia')} className="accent-primary" />
                     </div>
                   </div>
@@ -451,12 +451,12 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                 {/* Hardware Mechanics (PTZ) */}
                 {caps && (caps.pan || caps.tilt || caps.zoom) && (
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center bg-surfaceContainer px-4 py-2 rounded-full">
+                    <div className="flex justify-between items-center bg-surfaceContainerLow px-4 py-2 rounded-full">
                       <div className="flex items-center text-sm font-medium text-primary">
                         <span className="uppercase tracking-widest text-[10px]">Mechanics</span>
                         <Move className="w-3.5 h-3.5 ml-2" />
                       </div>
-                      <button onClick={resetMechanics} className="text-slate-500 hover:text-white transition-colors p-1" title="Reset Mechanics">
+                      <button onClick={resetMechanics} className="text-onSurfaceVariant hover:text-onSurface transition-colors p-1" title="Reset Mechanics">
                         <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-700 ease-in-out ${spinning['mechanics'] ? '-rotate-[360deg]' : ''}`} />
                       </button>
                     </div>
@@ -464,19 +464,19 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                     <div className="space-y-6 px-2">
                       {caps.pan && (
                         <div className="space-y-3">
-                          <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Pan</span><span>{tSettings?.pan || 0}°</span></div>
+                          <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Pan</span><span>{tSettings?.pan || 0}°</span></div>
                           <input type="range" min={caps.pan.min} max={caps.pan.max} step={caps.pan.step} value={tSettings?.pan || 0} onChange={handleHardwareChange('pan')} className="accent-primary" />
                         </div>
                       )}
                       {caps.tilt && (
                         <div className="space-y-3">
-                          <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Tilt</span><span>{tSettings?.tilt || 0}°</span></div>
+                          <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Tilt</span><span>{tSettings?.tilt || 0}°</span></div>
                           <input type="range" min={caps.tilt.min} max={caps.tilt.max} step={caps.tilt.step} value={tSettings?.tilt || 0} onChange={handleHardwareChange('tilt')} className="accent-primary" />
                         </div>
                       )}
                       {caps.zoom && (
                         <div className="space-y-3">
-                          <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Optical Zoom</span><span>{tSettings?.zoom || 1}x</span></div>
+                          <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Optical Zoom</span><span>{tSettings?.zoom || 1}x</span></div>
                           <input type="range" min={caps.zoom.min} max={caps.zoom.max} step={caps.zoom.step} value={tSettings?.zoom || 1} onChange={handleHardwareChange('zoom')} className="accent-primary" />
                         </div>
                       )}
@@ -486,27 +486,27 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
 
                 {/* Camera Sim */}
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center bg-surfaceContainer px-4 py-2 rounded-full">
+                  <div className="flex justify-between items-center bg-surfaceContainerLow px-4 py-2 rounded-full">
                     <div className="flex items-center text-sm font-medium text-primary">
                       <span className="uppercase tracking-widest text-[10px]">Sensor</span>
                       <Sun className="w-3.5 h-3.5 ml-2" />
                     </div>
-                    <button onClick={resetSensor} className="text-slate-500 hover:text-white transition-colors p-1" title="Reset Sensor">
+                    <button onClick={resetSensor} className="text-onSurfaceVariant hover:text-onSurface transition-colors p-1" title="Reset Sensor">
                       <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-700 ease-in-out ${spinning['sensor'] ? '-rotate-[360deg]' : ''}`} />
                     </button>
                   </div>
 
                   <div className="space-y-6 px-2">
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Exposure Bias</span><span>{filters.exposure}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Exposure Bias</span><span>{filters.exposure}</span></div>
                        <input type="range" min="-2" max="2" step="0.1" value={filters.exposure} onChange={handleRangeChange('exposure')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>ISO (Gain & Noise)</span><span>{filters.iso}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>ISO (Gain & Noise)</span><span>{filters.iso}</span></div>
                        <input type="range" min="100" max="3200" step="100" value={filters.iso} onChange={handleRangeChange('iso')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>White Balance (K)</span><span>{filters.temp}K</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>White Balance (K)</span><span>{filters.temp}K</span></div>
                        <input type="range" min="3000" max="9000" step="100" value={filters.temp} onChange={handleRangeChange('temp')} className="bg-gradient-to-r from-blue-900 via-slate-800 to-orange-900 rounded-full h-1.5"/>
                     </div>
                   </div>
@@ -514,25 +514,25 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
 
                 {/* Optics */}
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center bg-surfaceContainer px-4 py-2 rounded-full">
+                  <div className="flex justify-between items-center bg-surfaceContainerLow px-4 py-2 rounded-full">
                     <div className="flex items-center text-sm font-medium text-primary">
                       <span className="uppercase tracking-widest text-[10px]">Optics</span>
                       <ScanEye className="w-3.5 h-3.5 ml-2" />
                     </div>
-                    <button onClick={resetOptics} className="text-slate-500 hover:text-white transition-colors p-1" title="Reset Optics">
+                    <button onClick={resetOptics} className="text-onSurfaceVariant hover:text-onSurface transition-colors p-1" title="Reset Optics">
                       <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-700 ease-in-out ${spinning['optics'] ? '-rotate-[360deg]' : ''}`} />
                     </button>
                   </div>
 
                   <div className="space-y-6 px-2">
                      <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Desqueeze</span><span>{filters.desqueeze}x</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Desqueeze</span><span>{filters.desqueeze}x</span></div>
                        <div className="flex gap-2">
                           {[1.0, 1.33, 1.5, 2.0].map(v => (
                              <button 
                                key={v}
                                onClick={() => setFilters(f => ({ ...f, desqueeze: v }))}
-                               className={`flex-1 py-1.5 rounded-lg text-[10px] font-medium border ${filters.desqueeze === v ? 'bg-primary text-black border-primary' : 'bg-white/5 border-white/10 text-slate-400'}`}
+                               className={`flex-1 py-1.5 rounded-lg text-[10px] font-medium border ${filters.desqueeze === v ? 'bg-primary text-onPrimary border-primary' : 'bg-surfaceContainer border-outlineVariant text-onSurfaceVariant'}`}
                              >
                                {v}x
                              </button>
@@ -540,11 +540,11 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                        </div>
                     </div>
                      <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Digital Zoom</span><span>{filters.zoom}x</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Digital Zoom</span><span>{filters.zoom}x</span></div>
                        <input type="range" min="1" max="3" step="0.1" value={filters.zoom} onChange={handleRangeChange('zoom')} className="accent-primary" />
                     </div>
                     <div className="space-y-3">
-                       <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Vignette</span><span>{filters.vignette}</span></div>
+                       <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Vignette</span><span>{filters.vignette}</span></div>
                        <input type="range" min="0" max="1" step="0.05" value={filters.vignette} onChange={handleRangeChange('vignette')} className="accent-primary" />
                     </div>
                   </div>
@@ -553,7 +553,7 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                 {/* Intervalometer */}
                 {setIntervalometer && intervalometer && (
                   <div className="space-y-4">
-                     <div className="flex justify-between items-center bg-surfaceContainer px-4 py-2 rounded-full">
+                     <div className="flex justify-between items-center bg-surfaceContainerLow px-4 py-2 rounded-full">
                         <div className="flex items-center text-sm font-medium text-primary">
                            <span className="uppercase tracking-widest text-[10px]">Intervalometer</span>
                            <Timer className="w-3.5 h-3.5 ml-2" />
@@ -562,7 +562,7 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                      </div>
                      <div className="px-2 space-y-4">
                         <div className="space-y-3">
-                           <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Interval (Seconds)</span><span>{intervalometer.interval}s</span></div>
+                           <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Interval (Seconds)</span><span>{intervalometer.interval}s</span></div>
                            <input 
                              type="range" min="1" max="60" step="1" 
                              value={intervalometer.interval} 
@@ -571,7 +571,7 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                            />
                         </div>
                         <div className="space-y-3">
-                           <div className="flex justify-between text-xs text-slate-300 font-medium"><span>Count (0 = Infinite)</span><span>{intervalometer.count === 0 ? '∞' : intervalometer.count}</span></div>
+                           <div className="flex justify-between text-xs text-onSurfaceVariant font-medium"><span>Count (0 = Infinite)</span><span>{intervalometer.count === 0 ? '∞' : intervalometer.count}</span></div>
                            <input 
                              type="range" min="0" max="100" step="10" 
                              value={intervalometer.count} 
@@ -584,26 +584,26 @@ const SettingsFlyout: React.FC<SettingsFlyoutProps> = ({
                 )}
 
                 {/* MIDI Hint */}
-                 <div className="pt-8 border-t border-white/5 space-y-4">
-                   <div className="flex justify-between items-center text-sm font-medium text-slate-500 uppercase tracking-widest text-[10px]">
+                 <div className="pt-8 border-t border-outlineVariant space-y-4">
+                   <div className="flex justify-between items-center text-sm font-medium text-onSurfaceVariant uppercase tracking-widest text-[10px]">
                      <span>System Override</span>
                    </div>
                    <button 
                      onClick={toggleBoost}
-                     className="w-full py-4 px-5 rounded-[20px] border border-white/5 bg-surfaceContainer hover:bg-white/5 text-sm text-left flex items-center justify-between transition group"
+                     className="w-full py-4 px-5 rounded-[20px] border border-outlineVariant bg-surfaceContainer hover:bg-surfaceContainerHigh text-sm text-left flex items-center justify-between transition group"
                    >
-                     <span className="text-slate-200 font-medium">Crostini GPU Boost</span>
+                     <span className="text-onSurface font-medium">Crostini GPU Boost</span>
                      <div className={`w-12 h-6 rounded-full p-1 transition-colors flex items-center ${settings.boost ? 'bg-primary' : 'bg-surfaceVariant'}`}>
-                        <div className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${settings.boost ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                        <div className={`w-4 h-4 rounded-full bg-onPrimary shadow-sm transition-transform ${settings.boost ? 'translate-x-6' : 'translate-x-0'}`}></div>
                      </div>
                    </button>
                    
-                   <div className="w-full py-4 px-5 rounded-[20px] border border-white/5 bg-surfaceContainer text-sm text-left flex flex-col gap-2">
+                   <div className="w-full py-4 px-5 rounded-[20px] border border-outlineVariant bg-surfaceContainer text-sm text-left flex flex-col gap-2">
                      <div className="flex items-center gap-2 text-primary font-medium">
                         <Keyboard className="w-4 h-4" />
                         <span>MIDI Control Map</span>
                      </div>
-                     <div className="text-[10px] text-slate-400 grid grid-cols-2 gap-2">
+                     <div className="text-[10px] text-onSurfaceVariant grid grid-cols-2 gap-2">
                         <span>CC 1: Zoom</span>
                         <span>CC 2: Exposure</span>
                         <span>CC 3: LUT Strength</span>
