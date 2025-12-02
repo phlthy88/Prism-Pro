@@ -57,7 +57,7 @@ export default {
         'surface-container-highest': 'var(--md-sys-color-surface-container-highest)',
 
         'accent-ring': 'var(--md-sys-color-tertiary-container)',
-        scrim: '#000000',
+        scrim: 'var(--md-sys-color-scrim)',
 
         // Dynamic Accents (Vibrant highlights)
         accent: {

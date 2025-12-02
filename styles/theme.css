@@ -25,7 +25,9 @@
   --md-sys-color-surface-variant: #E7E0EC;
   --md-sys-color-on-surface-variant: #49454E;
   --md-sys-color-outline: #79747E;
+  --md-sys-color-outline-variant: #CAC4CF;
   --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
   --md-sys-color-inverse-surface: #313033;
   --md-sys-color-inverse-on-surface: #F4EFF4;
   --md-sys-color-inverse-primary: #D0BCFF;
@@ -71,7 +73,9 @@
   --md-sys-color-surface-variant: #49454F;
   --md-sys-color-on-surface-variant: #CAC4D0;
   --md-sys-color-outline: #938F99;
+  --md-sys-color-outline-variant: #49454F;
   --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
   --md-sys-color-inverse-surface: #E6E1E5;
   --md-sys-color-inverse-on-surface: #313033;
   --md-sys-color-inverse-primary: #6750A4;

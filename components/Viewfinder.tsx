@@ -353,17 +353,17 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
             
             {/* Camera Widget */}
             <div className="relative viewfinder-widget">
-              <div className={`flex items-center rounded-full backdrop-blur-xl border-2 font-semibold shadow-2xl transition-all hidden md:flex
+              <div className={`flex items-center rounded-full backdrop-blur-xl border-2 font-semibold shadow-elevation-3 transition-all hidden md:flex
                   ${cameraError
-                    ? 'bg-red-950/90 border-red-500/60 text-red-300 glow-orange'
+                    ? 'bg-error-container/90 border-error/60 text-on-error-container shadow-glow-orange'
                     : !isCameraEnabled
-                        ? 'bg-red-950/80 border-red-500/50 text-red-200'
-                        : 'bg-gradient-to-r from-black/85 to-black/90 border-accent-cyan/40 text-white glow-cyan'
+                        ? 'bg-error-container/80 border-error/50 text-on-error-container'
+                        : 'bg-surface-container/95 border-accent-cyan/40 text-on-surface shadow-glow-cyan'
                   }
                `}>
                  <button
                    onClick={onToggleCamera}
-                   className="pl-3 pr-2 py-1.5 flex items-center gap-2 hover:text-white hover:bg-white/10 transition-all rounded-l-full"
+                   className="pl-3 pr-2 py-1.5 flex items-center gap-2 hover:text-primary hover:bg-surface-variant/50 transition-all rounded-l-full"
                    title={isCameraEnabled ? "Turn Camera Off" : "Turn Camera On"}
                  >
                    {isCameraEnabled ? <Camera className="w-4 h-4" /> : <CameraOff className="w-4 h-4" />}
@@ -372,11 +372,11 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
                    </span>
                  </button>
 
-                 <div className="w-px h-4 bg-white/20"></div>
+                 <div className="w-px h-4 bg-outline-variant"></div>
 
                  <button
                    onClick={() => { setIsDeviceMenuOpen(!isDeviceMenuOpen); setIsMicMenuOpen(false); }}
-                   className="pl-2 pr-2 py-1.5 hover:text-white hover:bg-white/10 transition-all rounded-r-full flex items-center justify-center"
+                   className="pl-2 pr-2 py-1.5 hover:text-primary hover:bg-surface-variant/50 transition-all rounded-r-full flex items-center justify-center"
                    title="Camera Settings"
                  >
                    <ChevronDown className={`w-4 h-4 transition-transform ${isDeviceMenuOpen ? 'rotate-180' : ''}`} />
@@ -384,7 +384,7 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
                </div>
                 
               {isDeviceMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-gradient-to-br from-black/95 to-black/90 border-2 border-accent-cyan/30 rounded-[20px] shadow-2xl backdrop-blur-xl overflow-hidden z-50 py-2 glow-cyan">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-surface-container/98 border-2 border-accent-cyan/30 rounded-xl shadow-elevation-4 backdrop-blur-2xl overflow-hidden z-50 py-2 shadow-glow-cyan">
                   {videoDevices.map((device, i) => {
                     const isActive = device.deviceId === (activeDeviceId || currentDeviceId);
                     return (
@@ -394,11 +394,11 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
                           onDeviceChange(device.deviceId);
                           setIsDeviceMenuOpen(false);
                         }}
-                        className={`w-full text-left px-4 py-2.5 text-xs font-semibold hover:bg-white/10 transition-colors flex items-center gap-3
-                          ${isActive ? 'text-accent-cyan bg-accent-cyan/20' : 'text-white'}
+                        className={`w-full text-left px-4 py-2.5 text-xs font-semibold hover:bg-surface-variant transition-colors flex items-center gap-3
+                          ${isActive ? 'text-accent-cyan bg-accent-cyan/20' : 'text-on-surface'}
                         `}
                       >
-                        <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-accent-cyan shadow-[0_0_8px_var(--accent-cyan-glow)]' : 'bg-transparent border-2 border-white/50'}`}></div>
+                        <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-accent-cyan shadow-[0_0_8px_var(--accent-cyan-glow)]' : 'bg-transparent border-2 border-outline'}`}></div>
                         <span className="truncate">{device.label || `Camera ${i + 1}`}</span>
                       </button>
                     );
@@ -409,17 +409,17 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
 
             {/* Microphone Widget */}
             <div className="relative hidden md:block viewfinder-widget">
-               <div className={`flex items-center rounded-full backdrop-blur-xl border-2 font-semibold shadow-2xl transition-all
+               <div className={`flex items-center rounded-full backdrop-blur-xl border-2 font-semibold shadow-elevation-3 transition-all
                   ${audioError
-                    ? 'bg-red-950/90 border-red-500/60 text-red-300 glow-orange'
+                    ? 'bg-error-container/90 border-error/60 text-on-error-container shadow-glow-orange'
                     : !audioConfig.enabled
-                        ? 'bg-red-950/80 border-red-500/50 text-red-200'
-                        : 'bg-gradient-to-r from-black/85 to-black/90 border-accent-green/40 text-white glow-green'
+                        ? 'bg-error-container/80 border-error/50 text-on-error-container'
+                        : 'bg-surface-container/95 border-accent-green/40 text-on-surface shadow-glow-green'
                   }
                `}>
                  <button
                    onClick={() => setAudioConfig(prev => ({ ...prev, enabled: !prev.enabled }))}
-                   className="pl-3 pr-2 py-1.5 flex items-center gap-2 hover:text-white hover:bg-white/10 transition-all rounded-l-full"
+                   className="pl-3 pr-2 py-1.5 flex items-center gap-2 hover:text-primary hover:bg-surface-variant/50 transition-all rounded-l-full"
                    title={audioConfig.enabled ? "Mute Microphone" : "Unmute Microphone"}
                  >
                    {audioConfig.enabled ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}
@@ -428,11 +428,11 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
                    </span>
                  </button>
 
-                 <div className="w-px h-4 bg-white/20"></div>
+                 <div className="w-px h-4 bg-outline-variant"></div>
 
                  <button
                    onClick={() => { setIsMicMenuOpen(!isMicMenuOpen); setIsDeviceMenuOpen(false); }}
-                   className="pl-2 pr-2 py-1.5 hover:text-white hover:bg-white/10 transition-all rounded-r-full flex items-center justify-center"
+                   className="pl-2 pr-2 py-1.5 hover:text-primary hover:bg-surface-variant/50 transition-all rounded-r-full flex items-center justify-center"
                    title="Audio Settings"
                  >
                    <ChevronDown className={`w-4 h-4 transition-transform ${isMicMenuOpen ? 'rotate-180' : ''}`} />
@@ -440,8 +440,8 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
                </div>
 
               {isMicMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-black/95 to-black/90 border-2 border-accent-green/30 rounded-[24px] shadow-2xl backdrop-blur-xl overflow-hidden z-50 p-4 space-y-4 glow-green">
-                  <div className="h-20 w-full bg-black/60 rounded-lg overflow-hidden border-2 border-accent-green/20 relative">
+                <div className="absolute top-full left-0 mt-2 w-72 bg-surface-container/98 border-2 border-accent-green/30 rounded-xl shadow-elevation-4 backdrop-blur-2xl overflow-hidden z-50 p-4 space-y-4 shadow-glow-green">
+                  <div className="h-20 w-full bg-surface-dim rounded-lg overflow-hidden border-2 border-accent-green/20 relative">
                      <canvas ref={vuCanvasRef} width={280} height={80} className="w-full h-full" />
                   </div>
                   <div className="max-h-[120px] overflow-y-auto custom-scrollbar space-y-1">
@@ -452,10 +452,10 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
                            key={device.deviceId || i}
                            onClick={() => onAudioDeviceChange(device.deviceId)}
                            className={`w-full text-left px-3 py-2 text-xs font-semibold rounded-lg transition-colors flex items-center gap-2
-                             ${isActive ? 'bg-accent-green/20 text-accent-green' : 'hover:bg-white/10 text-white'}
+                             ${isActive ? 'bg-accent-green/20 text-accent-green' : 'hover:bg-surface-variant text-on-surface'}
                            `}
                          >
-                            <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-accent-green shadow-[0_0_8px_var(--accent-green-glow)]' : 'border-2 border-white/50'}`}></div>
+                            <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-accent-green shadow-[0_0_8px_var(--accent-green-glow)]' : 'border-2 border-outline'}`}></div>
                             <span className="truncate">{device.label || `Mic ${i + 1}`}</span>
                          </button>
                        );
@@ -482,7 +482,7 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
             {/* Basic Settings (New Button) */}
              <button
               onClick={onToggleBasicSettings}
-              className="w-10 h-10 rounded-full bg-gradient-to-br from-black/85 to-black/90 backdrop-blur-xl border-2 border-accent-purple/30 text-white hover:text-accent-purple hover:bg-white/10 hover:border-accent-purple/60 hover:glow-purple transition-all flex items-center justify-center shadow-2xl"
+              className="w-10 h-10 rounded-full bg-surface-container/95 backdrop-blur-xl border-2 border-accent-purple/30 text-on-surface hover:text-accent-purple hover:bg-surface-variant hover:border-accent-purple/60 hover:shadow-glow-purple transition-all flex items-center justify-center shadow-elevation-3"
               title="Basic Settings & Tools"
             >
               <Settings className="w-4 h-4" />
@@ -491,21 +491,21 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
             {/* Pro Settings (Sliders) */}
             <button
               onClick={onToggleProSettings}
-              className="w-10 h-10 rounded-full bg-gradient-to-br from-black/85 to-black/90 backdrop-blur-xl border-2 border-accent-pink/30 text-white hover:text-accent-pink hover:bg-white/10 hover:border-accent-pink/60 hover:glow-pink transition-all flex items-center justify-center shadow-2xl"
+              className="w-10 h-10 rounded-full bg-surface-container/95 backdrop-blur-xl border-2 border-accent-pink/30 text-on-surface hover:text-accent-pink hover:bg-surface-variant hover:border-accent-pink/60 hover:shadow-glow-pink transition-all flex items-center justify-center shadow-elevation-3"
               title="Pro Controls"
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>
             <button
               onClick={onToggleGrid}
-              className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center shadow-2xl backdrop-blur-xl ${settings.grid ? 'gradient-amber-orange text-black border-accent-amber glow-amber-accent' : 'bg-gradient-to-br from-black/85 to-black/90 border-accent-amber/30 text-white hover:text-accent-amber hover:bg-white/10 hover:border-accent-amber/60 hover:glow-amber-accent'}`}
+              className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center shadow-elevation-3 backdrop-blur-xl ${settings.grid ? 'gradient-amber-orange text-black border-accent-amber shadow-glow-amber' : 'bg-surface-container/95 border-accent-amber/30 text-on-surface hover:text-accent-amber hover:bg-surface-variant hover:border-accent-amber/60 hover:shadow-glow-amber'}`}
               title="Toggle Grid"
             >
               <Grid3x3 className="w-4 h-4" />
             </button>
             <button
               onClick={onFlipCamera}
-              className="w-10 h-10 rounded-full bg-gradient-to-br from-black/85 to-black/90 backdrop-blur-xl border-2 border-accent-blue/30 text-white hover:text-accent-blue hover:bg-white/10 hover:border-accent-blue/60 hover:glow-blue transition-all flex items-center justify-center shadow-2xl"
+              className="w-10 h-10 rounded-full bg-surface-container/95 backdrop-blur-xl border-2 border-accent-blue/30 text-on-surface hover:text-accent-blue hover:bg-surface-variant hover:border-accent-blue/60 hover:shadow-glow-blue transition-all flex items-center justify-center shadow-elevation-3"
               title="Flip Camera"
             >
               <SwitchCamera className="w-4 h-4" />
@@ -661,7 +661,7 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
             ref={controlsRef}
             onMouseEnter={() => setIsControlsHovered(true)}
             onMouseLeave={() => setIsControlsHovered(false)}
-            className={`relative bg-gradient-to-r from-black/90 via-black/85 to-black/90 backdrop-blur-2xl border-2 border-gradient-animated rounded-full flex items-center shadow-2xl pointer-events-auto transform transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] px-5 py-2 gap-4
+            className={`relative bg-surface-container/98 backdrop-blur-2xl border-2 border-gradient-animated rounded-full flex items-center shadow-elevation-4 pointer-events-auto transform transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] px-5 py-2 gap-4
               ${isControlsVisible ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-80'}
             `}
             style={{
@@ -669,15 +669,15 @@ const Viewfinder: React.FC<ViewfinderProps> = ({
             }}
           >
             <div className="flex items-center gap-2 border-r-2 border-accent-purple/30 pr-4">
-               <button onClick={togglePiP} className={`p-2 rounded-full transition-all ${isPiPActive ? 'gradient-cyan-blue text-white glow-cyan' : 'text-slate-300 hover:text-accent-cyan hover:bg-white/10 hover:glow-cyan'}`} title="Picture-in-Picture"><PictureInPicture2 className="w-4 h-4" /></button>
-               <button onClick={toggleVirtualCam} className={`p-2 rounded-full transition-all ${isVirtualCamActive ? 'gradient-purple-pink text-white glow-purple' : 'text-slate-300 hover:text-accent-purple hover:bg-white/10 hover:glow-purple'}`} title="Virtual Camera"><Cast className="w-4 h-4" /></button>
+               <button onClick={togglePiP} className={`p-2 rounded-full transition-all ${isPiPActive ? 'gradient-cyan-blue text-white shadow-glow-cyan' : 'text-on-surface-variant hover:text-accent-cyan hover:bg-surface-variant hover:shadow-glow-cyan'}`} title="Picture-in-Picture"><PictureInPicture2 className="w-4 h-4" /></button>
+               <button onClick={toggleVirtualCam} className={`p-2 rounded-full transition-all ${isVirtualCamActive ? 'gradient-purple-pink text-white shadow-glow-purple' : 'text-on-surface-variant hover:text-accent-purple hover:bg-surface-variant hover:shadow-glow-purple'}`} title="Virtual Camera"><Cast className="w-4 h-4" /></button>
             </div>
             <div className="flex items-center gap-4">
-              <button onClick={handleCaptureClick} className="w-12 h-12 rounded-full border-[3px] border-accent-lime/50 bg-white/10 hover:bg-white/20 hover:glow-lime active:scale-95 transition-all group flex items-center justify-center relative" title="Capture Photo"><div className="w-8 h-8 rounded-full bg-white group-hover:gradient-green-cyan transition-colors shadow-lg"></div></button>
-              <button onClick={isRecording ? stopRecording : startRecording} className={`w-10 h-10 rounded-[14px] border-[2px] transition-all flex items-center justify-center active:scale-95 ${isRecording ? 'border-red-500 bg-red-500/30 glow-orange' : 'border-accent-orange/40 bg-white/5 hover:glow-orange'}`} title={isRecording ? "Stop Recording" : "Start Recording"}>{isRecording ? <Square className="w-4 h-4 text-red-500 fill-current" /> : <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>}</button>
+              <button onClick={handleCaptureClick} className="w-12 h-12 rounded-full border-[3px] border-accent-lime/50 bg-surface-variant/50 hover:bg-surface-variant hover:shadow-glow-lime active:scale-95 transition-all group flex items-center justify-center relative" title="Capture Photo"><div className="w-8 h-8 rounded-full bg-on-surface group-hover:gradient-green-cyan transition-colors shadow-lg"></div></button>
+              <button onClick={isRecording ? stopRecording : startRecording} className={`w-10 h-10 rounded-[14px] border-[2px] transition-all flex items-center justify-center active:scale-95 ${isRecording ? 'border-red-500 bg-red-500/30 shadow-glow-orange' : 'border-accent-orange/40 bg-surface-variant/30 hover:shadow-glow-orange'}`} title={isRecording ? "Stop Recording" : "Start Recording"}>{isRecording ? <Square className="w-4 h-4 text-red-500 fill-current" /> : <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>}</button>
             </div>
             <div className="flex items-center gap-2 border-l-2 border-accent-pink/30 pl-4">
-               <button onMouseDown={() => setIsCompareActive(true)} onMouseUp={() => setIsCompareActive(false)} onTouchStart={() => setIsCompareActive(true)} onTouchEnd={() => setIsCompareActive(false)} className={`p-2 rounded-full transition-all ${isCompareActive ? 'gradient-amber-orange text-black glow-amber-accent' : 'text-slate-300 hover:text-accent-amber hover:bg-white/10 hover:glow-amber-accent'}`} title="Compare Original">{isCompareActive ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}</button>
+               <button onMouseDown={() => setIsCompareActive(true)} onMouseUp={() => setIsCompareActive(false)} onTouchStart={() => setIsCompareActive(true)} onTouchEnd={() => setIsCompareActive(false)} className={`p-2 rounded-full transition-all ${isCompareActive ? 'gradient-amber-orange text-black shadow-glow-amber' : 'text-on-surface-variant hover:text-accent-amber hover:bg-surface-variant hover:shadow-glow-amber'}`} title="Compare Original">{isCompareActive ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}</button>
             </div>
           </div>
         </div>
