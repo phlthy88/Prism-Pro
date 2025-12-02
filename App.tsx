@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import Header from './components/Header';
 import { useTheme } from './hooks/useTheme';
@@ -25,9 +24,9 @@ export default function App() {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
   const [settings, setSettings] = useState<AppSettings>(INITIAL_SETTINGS);
   const [audioConfig, setAudioConfig] = useState<AudioConfig>(INITIAL_AUDIO_CONFIG);
+
+  const webGLSupported = React.useMemo(() => isWebGLSupported(), []);
   
-  // 'basic' = Intelligence, Scopes, Media (Old ControlPanel)
-  // 'pro' = Hardware, Grading, LUTs (Old SettingsFlyout)
   const [activeFlyout, setActiveFlyout] = useState<'none' | 'basic' | 'pro'>('none');
   
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
@@ -37,13 +36,10 @@ export default function App() {
   const [lutLoader, setLutLoader] = useState<((file: File) => void) | null>(null);
   const [detectedScene, setDetectedScene] = useState<string>('Standard');
   
-  // Intervalometer state lifted to App level so it persists when flyout closes
   const [intervalometer, setIntervalometer] = useState<IntervalometerConfig>({ enabled: false, interval: 5, count: 0, frameCount: 0 });
   
-  // MIDI Hook - Maps physical knobs to filter state
   const { connectedDevice: midiDevice } = useMidi(setFilters, setAudioConfig);
 
-  // The universal toggle handler for header buttons and simple settings
   const handleToggleSetting = useCallback((key: keyof AppSettings) => {
     setSettings(prev => ({ ...prev, [key]: !prev[key] }));
   }, []);
@@ -77,8 +73,6 @@ export default function App() {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
   };
-
-  // --- Gallery Handlers ---
 
   const handleCapture = useCallback(async (dataUrl: string) => {
     const res = await fetch(dataUrl);
@@ -141,8 +135,6 @@ export default function App() {
     }
   }, []);
 
-  // --- Handlers ---
-
   const toggleBoost = () => {
     setSettings(prev => ({ ...prev, boost: !prev.boost }));
   };
@@ -158,34 +150,27 @@ export default function App() {
   return (
     <main className="fixed inset-0 w-full h-full bg-surface flex flex-col overflow-hidden">
       
-      {/* Header - Fixed Height, z-20 so it sits under backdrop (z-90) */}
-      <div className="shrink-0 z-20 px-6 pt-4 pb-2 bg-surface">
+      {/* Header - Fixed Height, z-[100] to sit below SettingsFlyout (z-[120]) and Toast (z-[130]) */}
+      <div className="shrink-0 z-[100] px-6 pt-4 pb-2 bg-surface">
         <Header 
           settings={settings}
           onToggleSetting={handleToggleSetting}
           theme={theme}
           setTheme={setTheme}
-          isWebGLSupported={isWebGLSupported()}
+          isWebGLSupported={webGLSupported}
+          onToggleBasicSettings={() => setActiveFlyout(prev => prev === 'basic' ? 'none' : 'basic')}
+          onToggleProSettings={() => setActiveFlyout(prev => prev === 'pro' ? 'none' : 'pro')}
         />
       </div>
 
       {/* Main Workspace - Flex Container */}
       <section className="flex-1 flex min-h-0 relative">
         
-        {/* Viewfinder Area (Dynamic Theater Mode Shifting) 
-            z-index logic: 
-              - Normal: z-0
-              - Any Flyout Open (Theater Mode): z-[100] to pop ABOVE the settings backdrop (z-[90])
-            
-            Margin logic for "Dynamic Shifting":
-              - Mobile (< md): mr-0. Panel overlays content.
-              - Tablet+ (md+): mr-[400px]. Shifts Viewfinder left to reveal panel, keeping viewfinder fully visible.
+        {/* Viewfinder Area 
+            - Centered container
+            - No margin shifting (mr-0) to maintain overlay behavior
         */}
-        <div 
-          className={`flex-1 flex items-center justify-center p-4 xl:p-8 min-w-0 min-h-0 relative transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] 
-            ${activeFlyout !== 'none' ? 'z-[100] mr-0 md:mr-[400px]' : 'z-0 mr-0'}
-          `}
-        >
+        <div className="flex-1 flex items-center justify-center p-4 xl:p-8 min-w-0 min-h-0 relative z-0">
           <Viewfinder 
             videoStream={videoStream}
             audioStream={audioStream}
@@ -228,13 +213,12 @@ export default function App() {
 
       </section>
 
-      {/* Unified Settings Flyout: 
+      {/* Unified Settings Flyout:
           - Backdrop is z-[90]
-          - Panel is z-[110]
-          - Mode prop determines content
+          - Panel is z-[120] to overlay Viewfinder
       */}
-      <SettingsFlyout 
-        className="z-[110]"
+      <SettingsFlyout
+        className="z-[120]"
         isOpen={activeFlyout !== 'none'}
         mode={activeFlyout === 'none' ? 'basic' : activeFlyout}
         onClose={() => setActiveFlyout('none')}
@@ -243,7 +227,7 @@ export default function App() {
         filters={filters}
         setFilters={setFilters}
         settings={settings}
-        setSettings={setSettings} // New for Basic
+        setSettings={setSettings}
         
         // Pro Props
         toggleBoost={toggleBoost}
@@ -252,7 +236,7 @@ export default function App() {
         applyControls={applyControls}
         loadLut={lutLoader}
         
-        // Basic Props (Migrated from ControlPanel)
+        // Basic Props
         audioConfig={audioConfig}
         setAudioConfig={setAudioConfig}
         audioAnalyser={audioAnalyser}
@@ -269,8 +253,8 @@ export default function App() {
         setIntervalometer={setIntervalometer}
       />
 
-      {/* Toast: z-[120] to stay on top of everything including settings */}
-      <Toast message={toastMessage} className="z-[120]" />
+      {/* Toast: z-[130] to stay on top of everything */}
+      <Toast message={toastMessage} className="z-[130]" />
     </main>
   );
 }
