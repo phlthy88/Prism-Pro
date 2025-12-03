@@ -1,8 +1,18 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 
 export const usePiP = (canvas: HTMLCanvasElement | null) => {
   const [isPiPActive, setIsPiPActive] = useState(false);
   const pipVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (pipVideoRef.current) {
+        pipVideoRef.current.srcObject = null;
+        pipVideoRef.current = null;
+      }
+    };
+  }, []);
 
   const togglePiP = useCallback(async () => {
     if (!canvas) return;

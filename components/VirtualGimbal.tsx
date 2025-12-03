@@ -1,17 +1,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import { FilterState } from '../types';
-
-interface MediaTrackCapabilitiesPTZ extends MediaTrackCapabilities {
-  pan?: { min: number; max: number; step: number };
-  tilt?: { min: number; max: number; step: number };
-  zoom?: { min: number; max: number; step: number };
-}
-
-interface MediaTrackSettingsPTZ extends MediaTrackSettings {
-  pan?: number;
-  tilt?: number;
-}
+import { FilterState, MediaTrackCapabilitiesPTZ, MediaTrackSettingsPTZ } from '../types';
 
 interface VirtualGimbalProps {
   filters: FilterState;
