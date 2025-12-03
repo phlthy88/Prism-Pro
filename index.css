@@ -48,6 +48,33 @@ input[type="range"] {
   }
 }
 
+/* Viewfinder overlay styles - always dark background context */
+.viewfinder-widget {
+  --widget-bg: rgba(0, 0, 0, 0.85);
+  --widget-bg-hover: rgba(255, 255, 255, 0.1);
+  --widget-border: rgba(255, 255, 255, 0.1);
+  --widget-text: rgba(255, 255, 255, 0.9);
+  --widget-text-muted: rgba(255, 255, 255, 0.6);
+}
+
+.viewfinder-widget {
+  background: var(--widget-bg);
+  border: 1px solid var(--widget-border);
+  color: var(--widget-text);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Accessible focus states */
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface;
+}
+
+/* For buttons on dark backgrounds (viewfinder) */
+.focus-ring-light {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black;
+}
+
 /* Gradient Backgrounds */
 .gradient-cyan-blue { background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%); }
 .gradient-purple-pink { background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-pink) 100%); }

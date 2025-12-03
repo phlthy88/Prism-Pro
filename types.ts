@@ -141,3 +141,16 @@ export interface FrameStats {
   lumaAvg?: number; // For low light detection
   smoothedLuma?: number; // Internal smoothed value
 }
+
+// Extended MediaTrack types for PTZ camera support
+export interface MediaTrackCapabilitiesPTZ extends MediaTrackCapabilities {
+  pan?: { min: number; max: number; step: number };
+  tilt?: { min: number; max: number; step: number };
+  zoom?: { min: number; max: number; step: number };
+}
+
+export interface MediaTrackSettingsPTZ extends MediaTrackSettings {
+  pan?: number;
+  tilt?: number;
+  zoom?: number;
+}

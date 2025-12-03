@@ -12,6 +12,15 @@ export default {
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
+      zIndex: {
+        'dropdown': '50',
+        'sticky': '60',
+        'flyout-backdrop': '100',
+        'flyout': '110',
+        'modal': '150',
+        'toast': '200',
+        'tooltip': '250',
+      },
       colors: {
         // Material You System Colors
         primary: 'var(--md-sys-color-primary)',
